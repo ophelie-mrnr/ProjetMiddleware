@@ -19,6 +19,7 @@ public class ClientFrame extends JFrame {
 	private JTabbedPane tabPanel;
 	private RegisterPanel registerPanel;
 	private ActionListener controller;
+	private ArticlesEnchereClientPanel ventesClient;
 	
 	public ClientFrame(IClient client, ActionListener controller) throws RemoteException {
 		super();
@@ -30,11 +31,14 @@ public class ClientFrame extends JFrame {
 		JScrollPane bidsScroll = new JScrollPane(bidsPanel);
 		this.ownedPanel = new OwnedPanel(client, controller);
 		JScrollPane ownedScroll = new JScrollPane(ownedPanel);
+		this.ventesClient = new ArticlesEnchereClientPanel(client, controller);
+		JScrollPane ventesScroll = new JScrollPane(ventesClient);
 		this.tabPanel = new JTabbedPane();
 		this.tabPanel.addTab("Soummettre un article", new SubmitPanel(client, controller));
 		this.tabPanel.addTab("Mes achats", ownedScroll);
 		this.tabPanel.addTab("Encheres", bidsScroll);
-		this.tabPanel.setSelectedIndex(2);
+		this.tabPanel.addTab("Mes ventes en cours", ventesScroll);
+		this.tabPanel.setSelectedIndex(1);
 		
 		
 		
@@ -63,12 +67,16 @@ public class ClientFrame extends JFrame {
 	public void rebuild() throws RemoteException {
 		this.tabPanel.remove(1);
 		this.tabPanel.remove(1);
+		this.tabPanel.remove(1);
 		this.bidsPanel = new BidsPanel(this.client, this.controller);
 		JScrollPane bidsScroll = new JScrollPane(bidsPanel);
 		this.ownedPanel = new OwnedPanel(this.client, this.controller);
 		JScrollPane ownedScroll = new JScrollPane(ownedPanel);
+		this.ventesClient = new ArticlesEnchereClientPanel(this.client, this.controller);
+		JScrollPane ventesScroll = new JScrollPane(ventesClient);
 		this.tabPanel.add("Mes achats", ownedScroll);
 		this.tabPanel.add("Encheres", bidsScroll);
+		this.tabPanel.add("Mes ventes en cours", ventesScroll);
 		this.tabPanel.setSelectedIndex(2);
 	}
 	

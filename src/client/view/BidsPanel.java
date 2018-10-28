@@ -65,7 +65,7 @@ public class BidsPanel extends JPanel {
 					}
 					JLabel plus = new JLabel("+");
 					JTextArea jta = new JTextArea(String.valueOf(i.getPrice() * 0.2));
-					BidButton btnbit = new BidButton("Enchérir", i, jta);
+					BidButton btnbit = new BidButton("Encherir", i, jta);
 
 					gbc.gridx = 0;
 					gbc.gridy = 0;

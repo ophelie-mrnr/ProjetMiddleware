@@ -42,7 +42,7 @@ public class SubmitPanel extends JPanel {
 		JLabel labelName = new JLabel("Nom : ");
 		JLabel labelDescription = new JLabel("Description : ");
 		JLabel labelPrice = new JLabel("Prix de base : ");
-		JLabel labelTime = new JLabel("Durée de la vente (minutes) : ");
+		JLabel labelTime = new JLabel("Duree de la vente (minutes) : ");
 
 		labelName.setPreferredSize(new Dimension(250, 40));
 		txtItemName.setPreferredSize(new Dimension(300, 40));
@@ -68,7 +68,11 @@ public class SubmitPanel extends JPanel {
 		this.add(labelName, gbSubmission);
 
 		gbSubmission.gridx = 2;
-		this.add(txtItemName, gbSubmission);
+		if (txtItemName.getText() == ""){
+			System.out.println("Veuillez entrer un nom pour votre produit");
+		}
+		else {
+		this.add(txtItemName, gbSubmission);}
 
 		// Description
 		gbSubmission.gridx = 1;
