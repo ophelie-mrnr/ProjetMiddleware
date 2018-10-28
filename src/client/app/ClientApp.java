@@ -10,6 +10,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import client.view.BidButton;
 import client.view.ClientFrame;
 import shared.IClient;
@@ -84,15 +86,24 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public synchronized void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "Connexion":
-			try {
-				this.pseudo = this.view.getRegisterPanel().getFieldContent();
-				this.server.registerClient(this);
-				this.view.setContentPane(view.getTabPanel());
-				this.updateView();
-			} catch (RemoteException e1) {
+				try {
+					
+				//if( this.pseudo == null || this.pseudo == ""){
+				//	JOptionPane.showMessageDialog(view, "Veuillez entrer un pseudo.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
+				//}
+				
+				//else{
+					this.pseudo = this.view.getRegisterPanel().getFieldContent();
+					this.server.registerClient(this);
+					this.view.setContentPane(view.getTabPanel());
+					this.updateView();
+				//}
+			}  
+			catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
 			break;
+			
 		case "Soumettre":
 			try {
 				Item item = this.view.getSubmitPanel().getFieldsContent();
@@ -104,13 +115,13 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 				e1.printStackTrace();
 			}
 			break;
-		case "Enchérir":
+		case "Encherir":
 			try {
 				BidButton source = (BidButton) e.getSource();
 				if (Double.parseDouble(source.getContent()) >= source.getItem().getPrice()*0.2) {
 					this.server.bid(source.getItem(), Double.parseDouble(source.getContent()), this.getPseudo());
 				} else {
-					System.out.println("Vous devez enchérir d'au moins 20% du prix courant.");
+					System.out.println("Vous devez encherir d'au moins 20% du prix courant.");
 				}
 			} catch (NumberFormatException e1) {
 				System.out.println("Merci de mettre un nombre.");

@@ -1,5 +1,6 @@
 package client.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -144,7 +145,7 @@ public class BidsPanel extends JPanel {
 		}
 		JButton logout = new JButton("Deconnexion");
 		logout.addActionListener(this.controller);
-		this.add(logout);
+		this.add(logout, BorderLayout.SOUTH);
 		
 	}
 }
