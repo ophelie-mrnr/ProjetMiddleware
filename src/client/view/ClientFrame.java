@@ -44,12 +44,16 @@ public class ClientFrame extends JFrame {
 		
 		this.setTitle("Gringott - Service d'encheres pour sorciers" );
 		//this.setTitle("Gringott - Service d'encheres pour sorciers : " + client.getPseudo());
-		this.setSize(800,600);
+		this.setSize(880,600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.add(tabPanel);
 		this.add(registerPanel);
 		this.setContentPane(registerPanel);
+	}
+
+	public IClient getClient() {
+		return client;
 	}
 
 	public Container getTabPanel() {

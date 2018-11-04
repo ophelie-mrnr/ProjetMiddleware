@@ -118,7 +118,7 @@ public class ServerApp extends UnicastRemoteObject implements IServer {
 			while (true) {
 				for (Item i : s.getItems()) {
 					Date localDate = new Date(System.currentTimeMillis());
-					if (i.getTime().compareTo(localDate) < 0 && !i.isSold()) {
+					if (i.getTime().compareTo(localDate) <= 0 && !i.isSold()) {
 						for (IClient c : s.getClients()) {
 							i.setSold(true);
 							s.getDB().updateItem(i);
