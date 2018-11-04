@@ -37,24 +37,37 @@ public class ServerApp extends UnicastRemoteObject implements IServer {
 			client.addNewItem(i);
 		}
 	}
-	
+
 	@Override
 	public void logout(IClient client) throws RemoteException {
 		System.out.println(client.getPseudo() + " logged out.");
 		for (IClient c : clients) {
 			if (c.getPseudo().equals(client.getPseudo())) {
 				this.clients.remove(client);
-			}
-			break;
+				break;
+			}			
 		}
-		System.out.println(clients.size() > 0 ? "Still connected : " + clients : "No clients connected now.");
+		
+		if(this.clients.size() > 0) {
+			String clientsNames = "";
+			for(int i = 0 ; i < this.clients.size(); i++) {
+				clientsNames = clientsNames + this.clients.get(i).getPseudo();
+				if(i < this.clients.size()-1) {
+					clientsNames = clientsNames + ", ";
+				}
+			}
+			System.out.println("Still connected : " + clientsNames);
+		}
+		else {
+			System.out.println("No clients connected now.");
+		}
 	}
 
 	@Override
 	public void bid(Item item, double newPrice, String buyer) throws RemoteException {
 		double price = item.getPrice() + newPrice;
 		System.out.println("New bid from " + buyer + " recorded for " + item.getName() + " at " + price);
-		
+
 		for (Item i : items) {
 			if (i.getName().equals(item.getName())){
 				i.setPrice(price);
@@ -62,7 +75,7 @@ public class ServerApp extends UnicastRemoteObject implements IServer {
 				dbManager.updateItem(i);
 			}
 		}
-		
+
 		for (IClient c : clients) {
 			c.update(item, price, buyer);
 		}
@@ -77,22 +90,22 @@ public class ServerApp extends UnicastRemoteObject implements IServer {
 			c.addNewItem(item);
 		}
 	}
-	
+
 	@Override
 	public List<Item> getItems() {
 		return this.items;
 	}
-	
+
 	@Override
 	public List<IClient> getClients() throws RemoteException {
 		return this.clients;
 	}
-	
+
 	@Override
 	public DBManager getDB() {
 		return this.dbManager;
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 			int port = 8090;
