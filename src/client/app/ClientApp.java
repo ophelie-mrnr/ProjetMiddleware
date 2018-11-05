@@ -3,6 +3,7 @@ package client.app;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
+import java.rmi.ConnectException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -169,15 +170,15 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 		try {
 			String serverURL = "localhost:8090/enchere";
 			ClientApp c = new ClientApp(serverURL);
-			System.out.println("Connexion au serveur " + serverURL + " reussi.");
+			System.err.println("Connexion au serveur " + serverURL + " reussi.");
 		} catch (RemoteException e) {
-			System.out.println("Connexion au serveur impossible.");
+			System.err.println("Connexion au serveur impossible.");
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
-			System.out.println("Erreur dans l'adresse du serveur.");
+			System.err.println("Erreur dans l'adresse du serveur.");
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			System.out.println("Serveur inconnu.");
+			System.err.println("Serveur inconnu.");
 			e.printStackTrace();
 		}
 	}
