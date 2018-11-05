@@ -37,13 +37,12 @@ public class ClientFrame extends JFrame {
 		this.tabPanel.addTab("Soumettre un article", new SubmitPanel(client, controller));
 		this.tabPanel.addTab("Mes achats", ownedScroll);
 		this.tabPanel.addTab("Encheres", bidsScroll);
-		this.tabPanel.addTab("Mes ventes en cours", ventesScroll);
+		this.tabPanel.addTab("Mes ventes", ventesScroll);
 		this.tabPanel.setSelectedIndex(1);
 		
 		
 		
 		this.setTitle("Gringott - Service d'encheres pour sorciers" );
-		//this.setTitle("Gringott - Service d'encheres pour sorciers : " + client.getPseudo());
 		this.setSize(880,600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -80,7 +79,7 @@ public class ClientFrame extends JFrame {
 		JScrollPane ventesScroll = new JScrollPane(ventesClient);
 		this.tabPanel.add("Mes achats", ownedScroll);
 		this.tabPanel.add("Encheres", bidsScroll);
-		this.tabPanel.add("Mes ventes en cours", ventesScroll);
+		this.tabPanel.add("Mes ventes", ventesScroll);
 		this.tabPanel.setSelectedIndex(2);
 	}
 	

@@ -51,7 +51,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 		}
 		if (!contains){
 			this.items.add(item);
-			System.out.println("On ajoute :"+ item.getName());
+			System.out.println("On ajoute : "+ item.getName());
 		}
 		this.updateView();
 	}
@@ -60,7 +60,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public void update(Item item, double newPrice, String buyer) throws RemoteException {
 		for (Item i : items){
 			if (i.getName().equals(item.getName()) && !i.isSold()){
-				System.out.println("Mise � jour de l'item : " + i.getName());
+				System.out.println("Mise à jour de l'item : " + i.getName());
 				i.setPrice(newPrice);
 				i.setLeader(buyer);
 				this.updateView();
@@ -100,7 +100,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 					this.view.setContentPane(view.getTabPanel());
 					this.updateView();
 				//}
-					this.view.setTitle("Gringott - Service d'encheres pour sorciers : " + view.getClient().getPseudo());
+					this.view.setTitle("Gringott - Service d'enchères pour sorciers : " + view.getClient().getPseudo());
 			}  
 			catch (RemoteException e1) {
 				e1.printStackTrace();
@@ -112,7 +112,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 				Item item = this.view.getSubmitPanel().getFieldsContent();
 				this.server.submit(item);
 				
-				// Ajout de l'item dans la liste des items poss�d�s
+				// Ajout de l'item dans la liste des items poss�d�s
 				this.items.add(item);
 				
 				this.view.getSubmitPanel().clear();
@@ -122,13 +122,13 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 				e1.printStackTrace();
 			}
 			break;
-		case "Encherir":
+		case "Enchérir":
 			try {
 				BidButton source = (BidButton) e.getSource();
 				if (Double.parseDouble(source.getContent()) >= source.getItem().getPrice()*0.2) {
 					this.server.bid(source.getItem(), Double.parseDouble(source.getContent()), this.getPseudo());
 				} else {
-					System.out.println("Vous devez encherir d'au moins 20% du prix courant.");
+					System.out.println("Vous devez enchérir d'au moins 20% du prix courant.");
 				}
 			} catch (NumberFormatException e1) {
 				System.out.println("Merci de mettre un nombre.");
@@ -136,7 +136,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 				e1.printStackTrace();
 			}
 			break;
-		case "Deconnexion":
+		case "Déconnexion":
 			this.view.setContentPane(view.getRegisterPanel());
 			try {
 				server.logout(this);
@@ -170,7 +170,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 		try {
 			String serverURL = "localhost:8090/enchere";
 			ClientApp c = new ClientApp(serverURL);
-			System.err.println("Connexion au serveur " + serverURL + " reussi.");
+			System.err.println("Connexion au serveur " + serverURL + " réussi.");
 		} catch (RemoteException e) {
 			System.err.println("Connexion au serveur impossible.");
 			e.printStackTrace();
