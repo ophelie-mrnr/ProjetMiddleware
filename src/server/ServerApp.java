@@ -83,10 +83,11 @@ public class ServerApp extends UnicastRemoteObject implements IServer {
 
 	@Override
 	public void submit(Item item) throws RemoteException {
-		System.out.println("New item registered : " + item);
+		System.out.println("New item registered : " + item.getName());
 		this.items.add(item);
 		dbManager.addItem(item);
 		for (IClient c : clients) {
+			//System.out.println(c.getPseudo());
 			c.addNewItem(item);
 		}
 	}

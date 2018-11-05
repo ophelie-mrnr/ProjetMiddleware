@@ -34,7 +34,7 @@ public class ClientFrame extends JFrame {
 		this.ventesClient = new ArticlesEnchereClientPanel(client, controller);
 		JScrollPane ventesScroll = new JScrollPane(ventesClient);
 		this.tabPanel = new JTabbedPane();
-		this.tabPanel.addTab("Soummettre un article", new SubmitPanel(client, controller));
+		this.tabPanel.addTab("Soumettre un article", new SubmitPanel(client, controller));
 		this.tabPanel.addTab("Mes achats", ownedScroll);
 		this.tabPanel.addTab("Encheres", bidsScroll);
 		this.tabPanel.addTab("Mes ventes en cours", ventesScroll);

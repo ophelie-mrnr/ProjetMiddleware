@@ -42,14 +42,15 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	@Override
 	public void addNewItem(Item item) throws RemoteException {
 		boolean contains = false;
+		//System.out.println("On test d'ajoute"+ item.getName());
 		for (Item i : items){
 			if (i.getName().equals(item.getName())){
 				contains = true;
 			}
 		}
 		if (!contains){
-			System.out.println("Nouvel item ajoutÃ© : " + item.getName());
 			this.items.add(item);
+			System.out.println("On ajoute :"+ item.getName());
 		}
 		this.updateView();
 	}
@@ -58,7 +59,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public void update(Item item, double newPrice, String buyer) throws RemoteException {
 		for (Item i : items){
 			if (i.getName().equals(item.getName()) && !i.isSold()){
-				System.out.println("Mise Ã  jour de l'item : " + i.getName());
+				System.out.println("Mise à  jour de l'item : " + i.getName());
 				i.setPrice(newPrice);
 				i.setLeader(buyer);
 				this.updateView();
@@ -109,6 +110,10 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 			try {
 				Item item = this.view.getSubmitPanel().getFieldsContent();
 				this.server.submit(item);
+				
+				// Ajout de l'item dans la liste des items possédés
+				this.items.add(item);
+				
 				this.view.getSubmitPanel().clear();
 			} catch (NumberFormatException e1) {
 				System.out.println("Merci de mettre des nombres.");
@@ -154,7 +159,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public List<Item> getItems() throws RemoteException {
 		return this.items;
 	}
-
+	
 	@Override
 	public void setPseudo(String pseudo) throws RemoteException {
 		this.pseudo = pseudo;

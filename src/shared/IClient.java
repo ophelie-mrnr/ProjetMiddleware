@@ -47,4 +47,5 @@ public interface IClient extends Remote {
 	 */
 	void setPseudo(String pseudo) throws RemoteException;
 	
+	
 }
