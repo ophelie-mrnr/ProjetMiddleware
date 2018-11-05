@@ -118,13 +118,15 @@ public class ServerApp extends UnicastRemoteObject implements IServer {
 			System.out.println("Adresse : localhost:" + port + "/enchere");
 
 			while (true) {
-				for (Item i : s.getItems()) {
+				//TODO : tester avec des boucles FOR classiques plutôt que des foreach
+				//for (Item i : s.getItems()) {
+				for(int i = 0 ; i < s.getItems().size(); i++) {	
 					Date localDate = new Date(System.currentTimeMillis());
-					if (i.getTime().compareTo(localDate) <= 0 && !i.isSold()) {
+					if (s.getItems().get(i).getTime().compareTo(localDate) <= 0 && !s.getItems().get(i).isSold()) {
 						for (IClient c : s.getClients()) {
-							i.setSold(true);
-							s.getDB().updateItem(i);
-							c.endSelling(i);
+							s.getItems().get(i).setSold(true);
+							s.getDB().updateItem(s.getItems().get(i));
+							c.endSelling(s.getItems().get(i));
 						}
 					}
 				}
