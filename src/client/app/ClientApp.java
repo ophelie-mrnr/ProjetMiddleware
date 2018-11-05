@@ -90,17 +90,17 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 		case "Connexion":
 				try {
 					
-				//if( this.pseudo == null || this.pseudo == ""){
-				//	JOptionPane.showMessageDialog(view, "Veuillez entrer un pseudo.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
-				//}
+				if( this.view.getRegisterPanel().getFieldContent().equals("")){
+					JOptionPane.showMessageDialog(view, "Veuillez entrer un pseudo valide.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
+				}
 				
-				//else{
+				else{
 					this.pseudo = this.view.getRegisterPanel().getFieldContent();
 					this.server.registerClient(this);
 					this.view.setContentPane(view.getTabPanel());
 					this.updateView();
-				//}
 					this.view.setTitle("Gringott - Service d'enchères pour sorciers : " + view.getClient().getPseudo());
+				}					
 			}  
 			catch (RemoteException e1) {
 				e1.printStackTrace();
