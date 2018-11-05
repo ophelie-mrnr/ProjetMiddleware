@@ -60,7 +60,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public void update(Item item, double newPrice, String buyer) throws RemoteException {
 		for (Item i : items){
 			if (i.getName().equals(item.getName()) && !i.isSold()){
-				System.out.println("Mise Ã  jour de l'item : " + i.getName());
+				System.out.println("Mise a  jour de l'item : " + i.getName());
 				i.setPrice(newPrice);
 				i.setLeader(buyer);
 				this.updateView();
@@ -108,10 +108,10 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 			break;
 			
 		case "Soumettre":
+			
 			try {
-				//System.out.println("Test : " + this.view.getRegisterPanel().getName()); //= null
-				if( this.view.getName().equals("")){
-						//getRegisterPanel().getFieldContent().equals("")){
+				Item item = this.view.getSubmitPanel().getFieldsContent();
+				if( item.getName().equals("")){
 					JOptionPane.showMessageDialog(view, "Veuillez entrer un nom pour votre article.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
 					
 				}
@@ -119,7 +119,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 					
 				//}
 				else{
-					Item item = this.view.getSubmitPanel().getFieldsContent();
+					
 					this.server.submit(item);
 					
 					// Ajout de l'item dans la liste des items possï¿½dï¿½s
