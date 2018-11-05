@@ -76,10 +76,13 @@ public class ClientFrame extends JFrame {
 		this.tabPanel.remove(1);
 		this.bidsPanel = new BidsPanel(this.client, this.controller);
 		JScrollPane bidsScroll = new JScrollPane(bidsPanel);
+		bidsScroll.getVerticalScrollBar().setUnitIncrement(16);
 		this.ownedPanel = new OwnedPanel(this.client, this.controller);
 		JScrollPane ownedScroll = new JScrollPane(ownedPanel);
+		ownedScroll.getVerticalScrollBar().setUnitIncrement(16);
 		this.ventesClient = new ArticlesEnchereClientPanel(this.client, this.controller);
 		JScrollPane ventesScroll = new JScrollPane(ventesClient);
+		ventesScroll.getVerticalScrollBar().setUnitIncrement(16);
 		this.tabPanel.add("Mes achats", ownedScroll);
 		this.tabPanel.add("Encheres", bidsScroll);
 		this.tabPanel.add("Mes ventes", ventesScroll);
