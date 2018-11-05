@@ -122,7 +122,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 				e1.printStackTrace();
 			}
 			break;
-		case "Enchérir":
+		case "Encherir":
 			try {
 				BidButton source = (BidButton) e.getSource();
 				if (Double.parseDouble(source.getContent()) >= source.getItem().getPrice()*0.2) {
@@ -136,7 +136,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 				e1.printStackTrace();
 			}
 			break;
-		case "Déconnexion":
+		case "Deconnexion":
 			this.view.setContentPane(view.getRegisterPanel());
 			try {
 				server.logout(this);
