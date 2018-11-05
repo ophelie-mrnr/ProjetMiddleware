@@ -69,6 +69,7 @@ public class SubmitPanel extends JPanel {
 
 		gbSubmission.gridx = 2;
 		if (txtItemName.getText() == ""){
+		//if (txtItemName.getText().equals("")){
 			System.out.println("Veuillez entrer un nom pour votre produit");
 		}
 		else {
