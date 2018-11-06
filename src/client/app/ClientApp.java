@@ -60,7 +60,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public void update(Item item, double newPrice, String buyer) throws RemoteException {
 		for (Item i : items){
 			if (i.getName().equals(item.getName()) && !i.isSold()){
-				System.out.println("Mise a� jour de l'item : " + i.getName());
+				System.out.println("Mise à jour de l'item : " + i.getName());
 				i.setPrice(newPrice);
 				i.setLeader(buyer);
 				this.updateView();
