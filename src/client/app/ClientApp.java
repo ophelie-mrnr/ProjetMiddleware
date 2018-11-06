@@ -60,7 +60,7 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 	public void update(Item item, double newPrice, String buyer) throws RemoteException {
 		for (Item i : items){
 			if (i.getName().equals(item.getName()) && !i.isSold()){
-				System.out.println("Mise a� jour de l'item : " + i.getName());
+				System.out.println("Mise a� jour de l'item : " + i.getName());
 				i.setPrice(newPrice);
 				i.setLeader(buyer);
 				this.updateView();
@@ -139,12 +139,28 @@ public class ClientApp extends UnicastRemoteObject implements IClient, ActionLis
 		case "Encherir":
 			try {
 				BidButton source = (BidButton) e.getSource();
-				if (Double.parseDouble(source.getContent()) >= source.getItem().getPrice()*0.2) {
-					this.server.bid(source.getItem(), Double.parseDouble(source.getContent()), this.getPseudo());
-				} else {
-					System.out.println("Vous devez encherir d'au moins 20% du prix courant.");
-					JOptionPane.showMessageDialog(view, "Vous devez encherir d'au moins 20% du prix courant.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
+				if(!(source.getItem().getLeader() == null)) {
+					if(!source.getItem().getLeader().equals(this.pseudo)) {
+						if (Double.parseDouble(source.getContent()) >= source.getItem().getPrice()*0.2) {
+							this.server.bid(source.getItem(), Double.parseDouble(source.getContent()), this.getPseudo());
+						} else {
+							System.out.println("Vous devez encherir d'au moins 20% du prix courant.");
+							JOptionPane.showMessageDialog(view, "Vous devez encherir d'au moins 20% du prix courant.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(view, "Vous ne pouvez enchérir sur une enchère d'on vous êtes déjà le leader", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
+				else {
+					if (Double.parseDouble(source.getContent()) >= source.getItem().getPrice()*0.2) {
+						this.server.bid(source.getItem(), Double.parseDouble(source.getContent()), this.getPseudo());
+					} else {
+						System.out.println("Vous devez encherir d'au moins 20% du prix courant.");
+						JOptionPane.showMessageDialog(view, "Vous devez encherir d'au moins 20% du prix courant.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				
 			} catch (NumberFormatException e1) {
 				System.out.println("Merci de mettre un nombre.");
 				JOptionPane.showMessageDialog(view, "Veuillez entrer un prix correcte.", "Message d'erreur", JOptionPane.INFORMATION_MESSAGE);
