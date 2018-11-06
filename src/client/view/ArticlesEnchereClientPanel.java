@@ -81,14 +81,7 @@ public class ArticlesEnchereClientPanel  extends JPanel{
 					itemPanel.add(descLabel, gbc);
 					gbc.gridx = 3;
 					gbc.gridy = 0;
-					gbc.gridwidth = 1;
-					itemPanel.add(plus, gbc);
-					gbc.gridx = 4;
-					gbc.gridy = 0;
-					itemPanel.add(jta, gbc);
-					gbc.gridx = 3;
-					gbc.gridy = 1;
-					gbc.gridwidth = 2;
+					gbc.gridwidth = 1;					
 				} else {
 					JLabel price = new JLabel(String.valueOf(i.getPrice()) + " mornilles.");
 					if (i.getLeader() == null) {
